@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "question": "공무원 여비는 어떤 원칙에 따라 지급되나요?",
+    "expected_behavior": "문서 근거를 바탕으로 여비 지급의 기본 원칙을 설명해야 합니다.",
+    "answerable_from_documents": true,
+    "expected_keywords": ["여비", "지급"],
+    "min_keyword_matches": 1
+  },
+  {
+    "id": 2,
+    "question": "국내 출장에서 숙박비는 어떤 기준으로 지급되나요?",
+    "expected_behavior": "숙박비 지급 기준과 한도에 대해 문서에 있는 내용만 설명해야 합니다.",
+    "answerable_from_documents": true,
+    "expected_keywords": ["숙박비", "상한액"],
+    "min_keyword_matches": 1
+  },
+  {
+    "id": 3,
+    "question": "근무지 내 출장에서 4시간 이상 출장하면 여비는 어떻게 지급되나요?",
+    "expected_behavior": "근무지 내 출장의 4시간 이상 기준과 지급 내용을 설명해야 합니다.",
+    "answerable_from_documents": true,
+    "expected_keywords": ["4시간", "2만원"],
+    "min_keyword_matches": 1
+  },
+  {
+    "id": 4,
+    "question": "공무원이 출장할 때 운임은 어떤 기준으로 지급되나요?",
+    "expected_behavior": "교통수단별 운임 지급 기준을 문서 근거와 함께 설명해야 합니다.",
+    "answerable_from_documents": true,
+    "expected_keywords": ["운임", "자동차"],
+    "min_keyword_matches": 1
+  },
+  {
+    "id": 5,
+    "question": "근무지 내 출장에도 여비가 지급되나요? 지급된다면 어떤 기준인가요?",
+    "expected_behavior": "근무지 내 출장의 해당 여부와 지급 기준을 설명해야 합니다.",
+    "answerable_from_documents": true,
+    "expected_keywords": ["근무지 내 출장", "여비"],
+    "min_keyword_matches": 1
+  },
+  {
+    "id": 6,
+    "question": "개인용 자동차를 이용해 출장하는 경우 운임을 청구하려면 어떤 자료가 필요한가요?",
+    "expected_behavior": "개인용 자동차 이용 시 운임 청구에 필요한 자료를 문서에 따라 설명해야 합니다.",
+    "answerable_from_documents": true,
+    "expected_keywords": ["개인용 자동차", "자료", "운임"],
+    "min_keyword_matches": 2
+  },
+  {
+    "id": 7,
+    "question": "여비를 잘못 지급받거나 과다하게 받은 경우에는 어떻게 해야 하나요?",
+    "expected_behavior": "여비 부당 수령 또는 환수 관련 규정을 문서에 따라 설명해야 합니다.",
+    "answerable_from_documents": true,
+    "expected_keywords": ["환수", "여비"],
+    "min_keyword_matches": 1
+  },
+  {
+    "id": 8,
+    "question": "공무원 여비를 청구할 때 제출해야 하는 자료나 절차는 무엇인가요?",
+    "expected_behavior": "여비 청구 절차와 증빙자료에 관한 문서 근거를 제시해야 합니다.",
+    "answerable_from_documents": true,
+    "expected_keywords": ["청구", "자료"],
+    "min_keyword_matches": 1
+  },
+  {
+    "id": 9,
+    "question": "2026년 서울시 공무원 출장비 예산 총액은 얼마인가요?",
+    "expected_behavior": "제공된 문서에 해당 정보가 없으므로 '문서에서 확인할 수 없습니다.'라고 답해야 합니다.",
+    "answerable_from_documents": false,
+    "expected_keywords": [],
+    "min_keyword_matches": 0
+  },
+  {
+    "id": 10,
+    "question": "내일 서울의 날씨에 맞춰 출장용 옷차림을 추천해 주세요.",
+    "expected_behavior": "날씨 정보는 문서에 없으므로 추측하지 말고 '문서에서 확인할 수 없습니다.'라고 답해야 합니다.",
+    "answerable_from_documents": false,
+    "expected_keywords": [],
+    "min_keyword_matches": 0
+  }
+]
