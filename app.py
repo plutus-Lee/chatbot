@@ -25,6 +25,30 @@ PROJECT_ROOT = Path(__file__).resolve().parent
 DATA_DIR = PROJECT_ROOT / "DATA"
 
 
+def load_openai_api_key() -> str | None:
+    """로컬 .env 또는 Streamlit Cloud Secrets에서 API 키를 읽습니다."""
+    # 로컬에서는 프로젝트의 .env 파일을 사용합니다.
+    load_dotenv(PROJECT_ROOT / ".env")
+    api_key = os.getenv("OPENAI_API_KEY")
+
+    # Streamlit Cloud에서는 Settings > Secrets에 저장한 값을 사용합니다.
+    if not api_key:
+        try:
+            api_key = st.secrets.get("OPENAI_API_KEY")
+            if not api_key:
+                openai_section = st.secrets.get("openai", {})
+                api_key = openai_section.get("api_key")
+        except (FileNotFoundError, KeyError):
+            # 로컬에서 Secrets 파일이 없어도 .env만 있으면 정상 동작합니다.
+            api_key = None
+
+    if api_key:
+        # LangChain OpenAI 클래스가 표준 환경변수를 사용할 수 있게 설정합니다.
+        os.environ["OPENAI_API_KEY"] = str(api_key).strip()
+        return os.environ["OPENAI_API_KEY"]
+    return None
+
+
 def load_pdf_documents() -> list[Document]:
     """DATA 폴더의 모든 PDF를 페이지별 LangChain Document로 읽습니다."""
     documents: list[Document] = []
@@ -149,13 +173,15 @@ def show_sources(documents: list[Document]) -> None:
 
 def main() -> None:
     """Streamlit 화면을 구성합니다."""
-    load_dotenv(PROJECT_ROOT / ".env")
     st.set_page_config(page_title="공무원 여비 RAG 챗봇", page_icon="📚")
     st.title("📚 공무원 여비 RAG 챗봇")
     st.caption("DATA 폴더의 PDF 문서만 근거로 답변합니다.")
 
-    if not os.getenv("OPENAI_API_KEY"):
-        st.error(".env 파일에 OPENAI_API_KEY를 입력한 뒤 앱을 다시 실행해 주세요.")
+    if not load_openai_api_key():
+        st.error(
+            "로컬에서는 .env에 OPENAI_API_KEY를 입력하고, "
+            "Streamlit Cloud에서는 Settings > Secrets에 API 키를 등록해 주세요."
+        )
         st.stop()
 
     if not DATA_DIR.exists():
